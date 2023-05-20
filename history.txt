@@ -1,0 +1,10 @@
+sudo docker image build . -t custom-caddy:alpine
+
+# criando container que não atualiza sem interromper a sua execução
+docker container run -d -p 2023:80 custom-caddy:alpine
+
+# criando container que atualiza sem interromper a sua execução
+docker container run -d -p 2024:80  \
+	-v ./caddy/Caddyfile:/etc/caddy/Caddyfile \
+	-v ./pages:/usr/src/pages \
+	custom-caddy:alpine
